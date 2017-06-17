@@ -24,9 +24,9 @@
         var center = [103.9271879196, 30.7462617980];
         //聚合距离
         var clusterDistance = 50;
-
+        //散列点数组
         var coordinate = new Array();
-
+        //散列点
         var coordinate1 = [104.1005229950, 30.6743128087];
         var coordinate2 = [103.9271879196, 30.7462617980];
         var coordinate3 = [103.6227035522, 30.9932085864];
@@ -52,28 +52,28 @@
         coordinate.push(coordinate10);
         coordinate.push(coordinate11);
         coordinate.push(coordinate12);
-
+        //散列点资源
         var source = new ol.source.Vector();
 
-        for(var i = 0; i < 12; i++){
+        for(var i = 0; i < coordinate.length; i++){
             var feature = new ol.Feature({
                 geometry:new ol.geom.Point(ol.proj.transform(coordinate[i], 'EPSG:4326', 'EPSG:3857'))
             });
             source.addFeature(feature);
         }
-
+        //聚类资源
         var clusterSource = new ol.source.Cluster({  
             distance:clusterDistance,  
             source: source  
         });  
-
+        //聚类
         var clusters = new ol.layer.Vector({  
             source: clusterSource,  
             style:function(feature) {  
                 return setClusterStyle(feature);  
             }  
         }); 
-
+        //设置聚类样式
         function setClusterStyle(feature){  
             var features = feature.get('features');  
             var size = features.length;  
@@ -97,11 +97,11 @@
             });  
             return style;  
         }   
-
+        //地图层
         var raster = new ol.layer.Tile({
             source: new ol.source.OSM()
         });
-
+        //整个地图
         var map = new ol.Map({
             layers: [raster,clusters],
             target: 'map',
