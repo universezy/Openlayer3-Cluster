@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin:0px;
+        }
+        .map{
+            width:100%;
+            height:100%;
+            margin:0px;
+        }
+    </style>
+    <script src="https://openlayers.org/en/v4.2.0/build/ol.js" type="text/javascript"></script>
+    <title>My footprint</title>
+</head>
+<body>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+        //起始位置
+        var center = [103.9271879196, 30.7462617980];
+        //聚合距离
+        var clusterDistance = 50;
+
+        var coordinate = new Array();
+
+        var coordinate1 = [104.1005229950, 30.6743128087];
+        var coordinate2 = [103.9271879196, 30.7462617980];
+        var coordinate3 = [103.6227035522, 30.9932085864];
+        var coordinate4 = [103.5752069950, 31.4663367378];
+        var coordinate5 = [103.4307861328, 30.1941019446];
+        var coordinate6 = [106.5885615349, 29.5679608922];
+        var coordinate7 = [106.4500522614, 29.5811456252];
+        var coordinate8 = [107.7666950226, 29.4161988273];
+        var coordinate9 = [118.1862562895, 24.4891501310];
+        var coordinate10 = [118.1982564926, 24.4947641146];
+        var coordinate11 = [79.1592185000, 12.9721456000];
+        var coordinate12 = [80.2164941000, 12.9914031000];
+
+        coordinate.push(coordinate1);
+        coordinate.push(coordinate2);
+        coordinate.push(coordinate3);
+        coordinate.push(coordinate4);
+        coordinate.push(coordinate5);
+        coordinate.push(coordinate6);
+        coordinate.push(coordinate7);
+        coordinate.push(coordinate8);
+        coordinate.push(coordinate9);
+        coordinate.push(coordinate10);
+        coordinate.push(coordinate11);
+        coordinate.push(coordinate12);
+
+        var source = new ol.source.Vector();
+
+        for(var i = 0; i < 12; i++){
+            var feature = new ol.Feature({
+                geometry:new ol.geom.Point(ol.proj.transform(coordinate[i], 'EPSG:4326', 'EPSG:3857'))
+            });
+            source.addFeature(feature);
+        }
+
+        var clusterSource = new ol.source.Cluster({  
+            distance:clusterDistance,  
+            source: source  
+        });  
+
+        var clusters = new ol.layer.Vector({  
+            source: clusterSource,  
+            style:function(feature) {  
+                return setClusterStyle(feature);  
+            }  
+        }); 
+
+        function setClusterStyle(feature){  
+            var features = feature.get('features');  
+            var size = features.length;  
+            var style = new ol.style.Style({  
+                image: new ol.style.Circle({  
+                    radius: 18,  
+                    stroke: new ol.style.Stroke({  
+                        color: '#fff'  
+                    }),  
+                    fill: new ol.style.Fill({  
+                        color: '#3399CC'  
+                    })  
+                }),  
+                text: new ol.style.Text({  
+                    font: '15px sans-serif',  
+                    text: size.toString(),  
+                    fill: new ol.style.Fill({  
+                        color: '#fff'  
+                    })  
+                })  
+            });  
+            return style;  
+        }   
+
+        var raster = new ol.layer.Tile({
+            source: new ol.source.OSM()
+        });
+
+        var map = new ol.Map({
+            layers: [raster,clusters],
+            target: 'map',
+            view: new ol.View({
+                center: ol.proj.transform(center, 'EPSG:4326', 'EPSG:3857'),
+                zoom: 5
+            })
+        });
+    </script>
+</body>
+</html>
