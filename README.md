@@ -6,7 +6,7 @@
 
 [Openlayer3 基础教程](http://anzhihun.coding.me/ol3-primer/index.html)
 
-[开始你的第一个Openlayer3项目](http://openlayers.org/en/latest/doc/quickstart.html)（导航栏的示例、API文档都很重要，新手一定要好好看哦）
+[开始你的第一个Openlayer3项目](http://openlayers.org/en/latest/doc/quickstart.html)（导航栏的示例、API文档都很重要，新手一定要好好看）
 
 如何呈现一副地图就不在这里多述了，上面教程里都有，下面开始讲今天的主题——集群Cluster：
 
