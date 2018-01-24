@@ -81,8 +81,8 @@ function setClusterStyle(feature){
     }
 ````
 
-*feature.get('features')这一步得到的是feature所在的集群的feature数组。如果集群的聚合点只需要显示总共包含多个标记点，那么这里就直接用size表示了，如果是其他自定义的信息，在聚合时需要判断feature，并且你需要在每一个点的feature创建时使用feature.set("key","value","boolean")的方式把你的自定义信息写入，size这里替换成你自己写的一个函数的调用，把这里获得的聚合点数组features传进去，函数里面对这个数组遍历，每一个item先判空，然后item.get("key")判空，没问题了就进行处理，比如你可以把features数组下的所有基本标记点上的数字加起来，函数最后return这个结果，在刚才的setClusterStyle里接收，text的text里显示，数字的话记得toString()。
-那么，集群你就已经完成了，再把地图层和集群层clusters一起添加到你的map的layers里，就大功告成。*
+**feature.get('features')这一步得到的是feature所在的集群的feature数组。如果集群的聚合点只需要显示总共包含多个标记点，那么这里就直接用size表示了，如果是其他自定义的信息，在聚合时需要判断feature，并且你需要在每一个点的feature创建时使用feature.set("key","value","boolean")的方式把你的自定义信息写入，size这里替换成你自己写的一个函数的调用，把这里获得的聚合点数组features传进去，函数里面对这个数组遍历，每一个item先判空，然后item.get("key")判空，没问题了就进行处理，比如你可以把features数组下的所有基本标记点上的数字加起来，函数最后return这个结果，在刚才的setClusterStyle里接收，text的text里显示，数字的话记得toString()。
+那么，集群你就已经完成了，再把地图层和集群层clusters一起添加到你的map的layers里，就大功告成。**
 
 ---
 ### 2. 如果是动态数据的Cluster：
