@@ -119,10 +119,10 @@ var clickSelect = new ol.interaction.Select({
 ---
 ### 3. 效果图：
 
-![](https://github.com/13608089849/Openlayer3-Cluster/blob/master/image/cluster.png)
+![](https://github.com/frogfans/Openlayer3-Cluster/blob/master/image/cluster.png)
 
 
 ---
 
-**关于Cluster的心得就说这么多，下一章说说[LineString](https://github.com/13608089849/Openlayer3-LineString)的静态和动态使用。**
+**关于Cluster的心得就说这么多，下一章说说[LineString](https://github.com/frogfans/Openlayer3-LineString)的静态和动态使用。**
 
