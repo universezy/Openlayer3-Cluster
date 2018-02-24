@@ -123,6 +123,11 @@ var clickSelect = new ol.interaction.Select({
 
 
 ---
+### 4. 在线体验:
 
+[Openlayers3-Cluster on-line](https://frogfans.github.io/res/html/openlayers3-cluster.html)
+
+
+---
 **关于Cluster的心得就说这么多，下一章说说[LineString](https://github.com/frogfans/Openlayer3-LineString)的静态和动态使用。**
 
