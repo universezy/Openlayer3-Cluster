@@ -19,7 +19,7 @@
 
 - 把每个点按照坐标生成对应的feature：
 
-````
+````javascript
 feature = new ol.Feature(new ol.geom.Point(coordinate));
 ````
 
@@ -27,7 +27,7 @@ feature = new ol.Feature(new ol.geom.Point(coordinate));
 
 - feature记得添加到features数组里面，然后把features数组放进Vector里：
 
-````
+````javascript
 var source = new ol.source.Vector({
         features: features
       });
@@ -35,7 +35,7 @@ var source = new ol.source.Vector({
 
 - 接下来就是重点了，设置集群：
 
-````
+````javascript
  var clusterSource = new ol.source.Cluster({
         distance:clusterDistance,
         source: source
@@ -44,7 +44,7 @@ var source = new ol.source.Vector({
 
 - clusterDistance是设置的聚合距离，在这个范围内的点就会聚合在一起。接下来设置聚合点集群的图层：
 
-````
+````javascript
 clusters = new ol.layer.Vector({
     			source: clusterSource,
     			style:function(feature) {
@@ -55,7 +55,7 @@ clusters = new ol.layer.Vector({
 
 - 这里style是聚合后在图上显示的feature的style，并不是最开始添加到features数组里的style，所以用一个函数把当前显示的feature传进去：
 
-````
+````javascript
 function setClusterStyle(feature){
     	var features = feature.get('features');
     	var size = features.length;
@@ -89,13 +89,13 @@ function setClusterStyle(feature){
 
 - 把新的点的feature添加到source里：
 
-````
+````javascript
 source.addFeature(feature);
 ````
 
 - 然后刷新集群：
 
-````
+````javascript
 clusterSource.refresh();
 ````
 
@@ -103,7 +103,7 @@ clusterSource.refresh();
 
 - 另外提一下，如果对地图添加了“选中”的交互，在缩放地图时，选中的feature不会消失，需要取消选中才能消失，可以通过给map加入分辨率变化监听的方式来移除选中的feature：
 
-````
+````javascript
 var clickSelect = new ol.interaction.Select({
     	style:function(feature) {
     		return setSelectStyle(feature);
@@ -119,15 +119,15 @@ var clickSelect = new ol.interaction.Select({
 ---
 ### 3. 效果图：
 
-![](https://github.com/frogfans/Openlayer3-Cluster/blob/master/image/cluster.png)
+![](image/cluster.png?raw=true)
 
 
 ---
 ### 4. 在线体验:
 
-[Openlayers3-Cluster on-line](https://frogfans.github.io/res/html/openlayers3-cluster.html)
+[Openlayers3-Cluster on-line](https://universezy.github.io/demo/openlayers3-cluster.html)
 
 
 ---
-**关于Cluster的心得就说这么多，下一章说说[LineString](https://github.com/frogfans/Openlayer3-LineString)的静态和动态使用。**
+**关于Cluster的心得就说这么多，下一章说说[LineString](../Openlayer3-LineString)的静态和动态使用。**
 
